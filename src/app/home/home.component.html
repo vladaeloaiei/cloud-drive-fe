@@ -1,0 +1,66 @@
+<h1>Hi {{currentUser.username}}!</h1>
+<p>Welcome to Cloud Drive</p>
+<button type="button" class="btn btn-light" (click)="createBucketModal()">Create bucket</button>
+<button type="button" class="btn btn-dark" (click)="openDeleteBucketModal()">Delete bucket</button>
+<button type="button" class="btn btn-light" (click)="openAddFileModal()">Add file</button>
+<button type="button" class="btn btn-dark" (click)="openShareBucketModal()">Share bucket</button>
+<h3>Owned buckets</h3>
+
+<div class="row">
+    <div class="row">
+        <div class="col">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action"
+                    *ngFor="let ownedBucket of ownedBuckets; let i = index" [class.active]="0 === i"
+                    id="owned-list-{{ownedBucket.name}}-list" data-toggle="list" href="#owned-list-{{ownedBucket.name}}"
+                    role="tab" attr.aria-controls="{{ownedBucket.name}}">{{ownedBucket.name}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" *ngFor="let ownedBucket of ownedBuckets; let i = index"
+                    [class.active]="0 === i" [class.show]="0 === i" id="owned-list-{{ownedBucket.name}}" role="tabpanel"
+                    attr.aria-labelledby="owned-list-{{ownedBucket.name}}-list">
+                    <div class="row" *ngFor="let ownedFile of ownedBucket.files" id="owned-list-{{ownedFile}}-file">
+                        <span class="col-16 list-group-item">{{ownedFile}}</span>
+                        <button type="button" class="btn btn-success"
+                            (click)="downloadFile(ownedBucket.id, ownedFile)">Download</button>
+                        <button type="button" class="btn btn-danger"
+                            (click)="deleteFile(ownedBucket.id, ownedFile)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Shared buckets</h3>
+<div class="row">
+    <div class="row">
+        <div class="col">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action"
+                    *ngFor="let sharedBucket of sharedBuckets; let i = index" [class.active]="0 === i"
+                    id="shared-list-{{sharedBucket.name}}-list" data-toggle="list"
+                    href="#shared-list-{{sharedBucket.name}}" role="tab"
+                    attr.aria-controls="{{sharedBucket.name}}">{{sharedBucket.name}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" *ngFor="let sharedBucket of sharedBuckets; let i = index"
+                    [class.active]="0 === i" [class.show]="0 === i" id="shared-list-{{sharedBucket.name}}"
+                    role="tabpanel" attr.aria-labelledby="shared-list-{{sharedBucket.name}}-list">
+                    <div class="row" *ngFor="let sharedFile of sharedBucket.files" id="shared-list-{{sharedFile}}-file">
+                        <span class="col-16 list-group-item">{{sharedFile}}</span>
+                        <button type="button" class="btn btn-success" (click)="downloadFile(sharedBucket.id, sharedFile)">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
