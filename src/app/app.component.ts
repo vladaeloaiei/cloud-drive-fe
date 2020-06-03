@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//import { Component } from '@angular/cors';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './_services/authentication.service';
@@ -9,7 +8,7 @@ import './_content/app.css';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
-    public static backendUrl: String = "http://192.168.1.141:8081";
+    public static backendUrl: String = "http://ec2-54-89-195-110.compute-1.amazonaws.com";
 
     currentUser: User;
 
